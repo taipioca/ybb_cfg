@@ -2,25 +2,45 @@
   "name": "youthbuildboston",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "main": "server/server.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev:frontend": "vite",
+    "dev:backend": "nodemon server/index.js",
+    "dev": "concurrently 'npm:dev:frontend' 'npm:dev:backend'",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/core": "^7.6.1",
+    "@mantine/form": "^7.6.1",
+    "@mantine/hooks": "^7.6.1",
+    "@vis.gl/react-google-maps": "^0.7.1",
+    "axios": "^1.6.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.18.3",
+    "googleapis": "^133.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "use-places-autocomplete": "^4.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "nodemon": "^3.1.0",
+    "postcss": "^8.4.35",
+    "postcss-preset-mantine": "^1.13.0",
+    "postcss-simple-vars": "^7.0.1",
     "vite": "^5.1.4"
-  }
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "author": "",
+  "license": "ISC"
 }
