@@ -66,3 +66,7 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.mappy{
+  width: 500px;
+  height: 500px;
+}
