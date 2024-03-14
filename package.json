@@ -11,9 +11,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
     "@mantine/core": "^7.6.1",
     "@mantine/form": "^7.6.1",
     "@mantine/hooks": "^7.6.1",
+    "@mui/icons-material": "^5.15.13",
+    "@mui/material": "^5.15.12",
     "@vis.gl/react-google-maps": "^0.7.1",
     "axios": "^1.6.7",
     "cors": "^2.8.5",

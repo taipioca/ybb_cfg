@@ -1,0 +1,11 @@
+.my-accordion {
+    margin-bottom: 16px;
+  }
+  
+.my-accordion-summary {
+  flex-direction: row-reverse;
+}
+
+.my-title {
+  margin-right: 8px;
+}
