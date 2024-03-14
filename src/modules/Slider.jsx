@@ -5,13 +5,13 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
-// import VolumeUp from '@mui/icons-material/VolumeUp';
 
 const Input = styled(MuiInput)`
   width: 42px;
+  font-size: 0.875rem;
 `;
 
-export default function InputSlider({ min, max, default: defaultValue }) {
+export default function InputSlider({ min, max, default: defaultValue, description = '', caption = '', units = '' }) {
   const [value, setValue] = React.useState(defaultValue);
 
   const handleSliderChange = (event, newValue) => {
@@ -31,9 +31,16 @@ export default function InputSlider({ min, max, default: defaultValue }) {
   };
 
   return (
-    <Box sx={{ width: 250 }}>
+    <Box>
+      <Typography id="input-slider" gutterBottom align="left" variant="body2" style={{ marginBottom: '20px' }}>
+        {description}
+      </Typography>
       <Grid container spacing={2} alignItems="center">
         <Grid item xs>
+          <Box display="flex" justifyContent="space-between">
+            <Typography variant="caption">{min}</Typography>
+            <Typography variant="caption">{max}</Typography>
+          </Box>
           <Slider
             value={typeof value === 'number' ? value : 0}
             onChange={handleSliderChange}
@@ -42,8 +49,9 @@ export default function InputSlider({ min, max, default: defaultValue }) {
             aria-labelledby="input-slider"
           />
         </Grid>
-        <Grid item>
-          <Input
+      </Grid>
+      <Typography id="slider-value" gutterBottom align="left" variant="body2">
+        {caption} <Input
             value={value}
             size="small"
             onChange={handleInputChange}
@@ -55,9 +63,8 @@ export default function InputSlider({ min, max, default: defaultValue }) {
               type: 'number',
               'aria-labelledby': 'input-slider',
             }}
-          />
-        </Grid>
-      </Grid>
+          /> {units}
+      </Typography>
     </Box>
   );
 }

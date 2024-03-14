@@ -24,6 +24,6 @@ body, html {
 
 .MainMap {
     flex: 5;
-    border-radius: 2%;
+    border-radius: 1%;
     overflow: hidden;
 }

@@ -10,7 +10,7 @@ import '@mantine/core/styles.css';
 function App() {
   
     return (
-      <APIProvider apiKey={"AIzaSyAigfTB0Xn0hrPkyB4sK4LaA_F5MX-9R5I"}>
+      <APIProvider apiKey={""}>
 
           <MapPage/>
 
