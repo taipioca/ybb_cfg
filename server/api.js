@@ -37,7 +37,6 @@ router.get("/getlocations", async (req, res)=>{
         range: "Sheet1",
     })
     getRows.data.values.shift()
-    console.log(getRows.data.values)
     const locations = await Promise.all(getRows.data.values.map( async (place)=>{
         const address = await getLatLng(place[0])
         return ({

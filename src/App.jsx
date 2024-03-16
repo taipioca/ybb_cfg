@@ -8,7 +8,7 @@ import MainMap from './Map';
 function App() {
   
     return (
-      <APIProvider apiKey={"REACT_APP_API_KEY HERE"}>
+      <APIProvider apiKey={"API KEY HERE"}>
           <MainMap/>
       </APIProvider>
     );

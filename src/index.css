@@ -69,4 +69,20 @@ button:focus-visible {
 .mappy{
   width: 500px;
   height: 500px;
+  color: #1a1a1a;
+}
+
+.schoolIcon{
+  background-color: blue;
+  border-radius: 30%;
+}
+
+.houseIcon{
+  background-color: red;
+  border-radius: 30%;
+}
+
+.otherIcon{
+  background-color: green;
+  border-radius: 30%;
 }

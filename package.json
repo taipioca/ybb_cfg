@@ -11,9 +11,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@deck.gl/google-maps": "^8.9.35",
+    "@deck.gl/layers": "^8.9.35",
     "@mantine/core": "^7.6.1",
     "@mantine/form": "^7.6.1",
     "@mantine/hooks": "^7.6.1",
+    "@react-google-maps/api": "^2.19.3",
+    "@tabler/icons-react": "^2.47.0",
     "@vis.gl/react-google-maps": "^0.7.1",
     "axios": "^1.6.7",
     "cors": "^2.8.5",
