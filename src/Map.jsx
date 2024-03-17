@@ -33,7 +33,7 @@ const MainMap = () => {
         disableD
         disableDefaultUI
         >
-        <DeckGlOverlay layers={[layer]} />
+        {/* <DeckGlOverlay layers={[layer]} /> */}
         {markers}
         </Map>
     </div>)
