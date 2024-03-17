@@ -6,14 +6,13 @@ import "./App.css";
 import MapPage from "./MapPage";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
-import {NextUIProvider} from "@nextui-org/react";
-import "./styles/styles.css"
+import { NextUIProvider } from "@nextui-org/react";
+import "./styles/styles.css";
 
 function App() {
   return (
     <NextUIProvider>
-
-      <APIProvider apiKey={"AIzaSyAigfTB0Xn0hrPkyB4sK4LaA_F5MX-9R5I"}>
+      <APIProvider apiKey={"react api key here"}>
         <MapPage />
       </APIProvider>
     </NextUIProvider>
