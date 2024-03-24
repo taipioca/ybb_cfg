@@ -1,0 +1,28 @@
+.Legend-Contain{
+    background-color: white;
+    position: absolute;
+    bottom: 6%;
+    left: 6%;
+    padding-right: 1vw;
+    padding-left: 1vw;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+}
+.Inner-Legend-Contain{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.filter-key-contain{
+    display: flex;
+    align-items: center;
+    font-size: 1vh;
+}
+
+.filter-key-color{
+    height: 1vh;
+    width: 1vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}

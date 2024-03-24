@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import {AdvancedMarker, InfoWindow, useMarkerRef} from '@vis.gl/react-google-maps';
-import getLocations from "../utilites";
 import { IconHome, IconMapPin, IconSchool } from "@tabler/icons-react";
 
 const SingleMarker = ({location}) => {
