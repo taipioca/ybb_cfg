@@ -8,7 +8,7 @@ import "./styles/styles.css";
 function App() {
   return (
     <NextUIProvider>
-      <APIProvider apiKey={"API KEY HERE"}>
+      <APIProvider apiKey={"KEY HERE"}>
         <MapPage />
       </APIProvider>
     </NextUIProvider>

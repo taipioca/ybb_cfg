@@ -44,4 +44,10 @@ const createKeys = (max)=>{
     ]
     )
 }
-export {getLocations, getNeighborhoodData, createKeys};
+
+const cleanStat = (number)=>{
+    if (number < 1) return `${Math.ceil(number*100)}%`
+    return `$${cleanNumber(number)}`
+
+}
+export {getLocations, getNeighborhoodData, createKeys, cleanStat};

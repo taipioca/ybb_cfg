@@ -1,0 +1,40 @@
+.info-window-container{
+    display: flex;
+    align-items: center;
+}
+
+.info-container{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-items: space-evenly;
+    align-items: self-start;
+}
+
+.info-container p{
+    font-size: 1.3vh;
+    margin-bottom: .1vh;
+}
+
+.info-container h1{
+    font-size: 2vh;
+    font-weight: bold;
+    margin-bottom: .2vh;
+}
+
+.image-container{
+    width: 10vmin;
+    height: 10vmin;
+    position: relative;
+    overflow: hidden;
+    margin-right: 2vmin;
+    margin-left: 1vmin;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.image-container img{
+    max-width: 100%;
+    max-height: 100%;
+}

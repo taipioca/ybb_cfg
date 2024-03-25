@@ -52,8 +52,7 @@ const getNeighborhoods = async()=>{
     spreadsheetData.forEach((sheet, index)=>{
         sheetStats = sheet.shift().slice(1)
         source = sheet.pop()[0]
-        maxes = sheet.pop().slice(1)   
-        neighborhoodData["sources"] = {...neighborhoodData["sources"], [sheets[index]]: source}
+        maxes = sheet.pop().slice(1)
         neighborhoodData["filters"].push(...sheetStats)
         // Get maxes
         for ( i = 0; i<sheetStats.length; i++){
@@ -64,6 +63,7 @@ const getNeighborhoods = async()=>{
             for (i = 0; i < sheetStats.length; i++){
                 if (neighborhood[i+1]) {
                 neighborhoodData[neighborhood[0]] = {...neighborhoodData[neighborhood[0]], [sheetStats[i]]: neighborhood[i+1]}}
+                neighborhoodData["sources"] = {...neighborhoodData["sources"], [sheetStats[i]]: source}
             }
         })
     })
@@ -80,9 +80,10 @@ const getLocations = async()=>{
     })
     getRows.data.values.shift()
     const locations = await Promise.all(getRows.data.values.map( async (place)=>{
-        const address = await getLatLng(place[0])
+        const position = await getLatLng(place[0])
         return ({
-            address,
+            position,
+            address: place[0],
             type: place[1],
             description: place[2] ? place[2] : null})
     }))

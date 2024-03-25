@@ -15,6 +15,7 @@ const Legend = ({filter}) =>{
             <p className="filter-key-contain">{filter.title}</p>
             {keys}
         </div>
+        <p className="source-contain">{filter.source}</p>
     </div>)
 }
 
