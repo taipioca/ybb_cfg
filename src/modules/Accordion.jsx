@@ -33,7 +33,7 @@ export default function AccordionUsage() {
             width="100%"
           >
             <Box display="flex" alignItems="center">
-              <Typography>Example Filter (multiple select)</Typography>
+              <Typography>Overlay Type</Typography>
               <ExpandMoreIcon />
             </Box>
             <Toggle checked={disabled} onChange={handleToggle} />
@@ -43,8 +43,12 @@ export default function AccordionUsage() {
           <Box width="100%" display="flex" justifyContent="center">
             <Box width="90%">
               <Checkboxes
-                description="Select project categories to include in your search:"
-                options={["Option 1", "Option 2", "Option 3"]}
+                description="Select project overlay to display:"
+                options={[
+                  "Median Household Income (2015)",
+                  "Residents without a High School Diploma (2015)",
+                  "Housing Units that are Rentals (2015)",
+                ]}
                 disabled={disabled}
               />
             </Box>
