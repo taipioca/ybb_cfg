@@ -7,10 +7,9 @@ import {
   Button,
 } from "@nextui-org/react";
 
-export default function App() {
-  const [selectedKey, setSelectedKey] = React.useState("select_overlay");
+export default function App({ selectedKey, setSelectedKey }) {
   const selectedValue = React.useMemo(
-    () => selectedKey.replaceAll("_", " "),
+    () => selectedKey ? selectedKey.replaceAll("_", " ") : "",
     [selectedKey]
   );
 
@@ -30,7 +29,7 @@ export default function App() {
         onSelectionChange={(keys) => setSelectedKey(Array.from(keys)[0])}
       >
         <DropdownItem key="Select_Overlay">Select overlay</DropdownItem>
-        <DropdownItem key="Median_Household_Income (2015)">
+        <DropdownItem key="Median_Household_Income_(2015)">
           Median Household Income (2015)
         </DropdownItem>
         <DropdownItem key="Residents_without_a_High_School_Diploma">

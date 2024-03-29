@@ -9,11 +9,11 @@ import getLayer from "./GenerateLayers";
 import Legend from "./Legend";
 import { getNeighborhoodData } from "../utilites";
 import NeighborhoodModal from "./NeighborhoodInfoWindow";
-const MainMap = () => {
+const MainMap = ({ filter }) => {
     const [locations, setLocations] = useState(false);
     const [overlay, setOverlay] = useState(false)
     const [neighborhoodData, setNeighborhoodData] = useState(false)
-    const [filter, setFilter] = useState(false)
+    // const [filter, setFilter] = useState(false)
     const [keys, setKeys] = useState(false)
     const [filters, setFilters] = useState(false)
     const [clickedNeighborhood, setClickedNeighborhood] = useState(false)
@@ -36,18 +36,22 @@ const MainMap = () => {
         if (cursor) map.setOptions({draggableCursor: "pointer"})
         else map.setOptions({draggableCursor: ""})}
     },[cursor])
-
-    useEffect(()=>{
-        if (neighborhoodData && filter){
-            getLayer(neighborhoodData, setClickedNeighborhood, setLocation, setCursor, filter).then((layer)=>{setOverlay(layer)})
-            setKeys(createKeys(neighborhoodData.maxes[filter])
-            )
+    
+    useEffect(() => {
+        console.log('Selected filter:', filter); // add this line
+      
+        if (neighborhoodData && filter) {
+          getLayer(neighborhoodData, setClickedNeighborhood, setLocation, setCursor, filter).then((layer) => {
+            setOverlay(layer);
+          });
+          setKeys(createKeys(neighborhoodData.maxes[filter]));
+        } else if (neighborhoodData) {
+          setKeys(false);
+          getLayer(neighborhoodData, setClickedNeighborhood, setLocation, setCursor).then((layer) => {
+            setOverlay(layer);
+          });
         }
-        else if (neighborhoodData) {
-            setKeys(false)
-            getLayer(neighborhoodData, setClickedNeighborhood, setLocation, setCursor).then((layer)=>{setOverlay(layer)})
-        }
-    }, [filter])
+      }, [filter]);
 
     if (locations){
         markers = locations.map((location, key)=>{
@@ -58,10 +62,10 @@ const MainMap = () => {
     }
     return(
     <div className='mappy'>
-        <button style={{backgroundColor: "grey"}}onClick={()=>{
+        {/* <button style={{backgroundColor: "grey"}}onClick={()=>{
             if (!filter) setFilter("Median Household Income (2015)")
             else setFilter(false)
-            }}>press me to show Median Household Income (2015)</button>
+            }}>press me to show Median Household Income (2015)</button> */}
         <Map
         mapId={'828c076a50ba3ed0'}
         defaultCenter={{lat: 42.3200, lng: -71.0589}}
