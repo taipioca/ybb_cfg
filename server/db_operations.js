@@ -22,12 +22,13 @@ const intializeClient = async () => {
 
 // Makes an api to google's Geocoder and logs lat and lng of first result
 const getLatLng = async (address) => {
-  return axios
-    .get(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GEOCODE_API_KEY}`
-    )
-    .then((response) => response.data.results[0].geometry.location);
+        return axios
+        .get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GEOCODE_API_KEY}`
+        )
+        .then((response) => response.data.results[0].geometry.location);
 };
+
 const getNeighborhoods = async () => {
   const [auth, googleSheets] = await intializeClient();
   const spreadsheetInfo = await googleSheets.spreadsheets.get({
@@ -84,7 +85,6 @@ const getNeighborhoods = async () => {
   return neighborhoodData;
 };
 const getLocations = async () => {
-  console.log(YBB_PROJECTS_SPREADSHEETID);
   const [auth, googleSheets] = await intializeClient();
   // Get metadata about spreadsheet
   // Read rows from spreadsheet
