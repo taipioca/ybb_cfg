@@ -92,7 +92,7 @@ const getLocations = async () => {
   const getRows = await googleSheets.spreadsheets.values.get({
     auth,
     spreadsheetId: YBB_PROJECTS_SPREADSHEETID,
-    range: "Sheet1",
+    range: "In Use",
   });
   getRows.data.values.shift();
   const locations = await Promise.all(
