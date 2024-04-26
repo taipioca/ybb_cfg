@@ -66,23 +66,23 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-.mappy{
+.mappy {
   width: 100%;
   height: 100%;
   color: #1a1a1a;
 }
 
-.schoolIcon{
-  background-color: blue;
+.schoolIcon {
+  background-color: rgb(119, 62, 172);
   border-radius: 30%;
 }
 
-.houseIcon{
+.houseIcon {
   background-color: red;
   border-radius: 30%;
 }
 
-.otherIcon{
-  background-color: green;
+.otherIcon {
+  background-color: rgb(87, 131, 87);
   border-radius: 30%;
 }

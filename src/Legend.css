@@ -1,35 +1,56 @@
-.Legend-Contain{
+.Legend-Contain {
     background-color: white;
     position: absolute;
     bottom: 6%;
     left: 6%;
-    padding-right: 1vw;
-    padding-left: 1vw;
-    padding-top: 1vw;
-    padding-bottom: 1vw;
-}
-.Inner-Legend-Contain{
+    padding: 1vw;
+    font-size: 0.8em;
+    border-radius: 10px;
+    width: 15%;
+    height: 18%;
+    box-shadow: 0px 0px 10px rgba(84, 84, 84, 0.25); /* add shadow */
+  }
+  
+  .Inner-Legend-Contain {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-}
-
-.filter-key-contain{
+    align-items: flex-start; /* left align the box */
+  }
+  
+  .filter-key-contain {
     display: flex;
     align-items: center;
-    font-size: 1vh;
-}
-
-.filter-key-color{
+    font-size: 1.2em; /* make the legend labels larger */
+  }
+  
+  .filter-key-contain:first-child {
+    font-size: 1.5em; /* make the title the largest */
+  }
+  
+  .filter-key-color {
     height: 1vh;
     width: 1vh;
-    margin-left: 1vw;
-    margin-right: 1vw;
-}
-
-.source-contain{
+    margin: 0 1vw;
+  }
+  
+  .source-contain {
     display: flex;
     align-items: center;
-    font-size: 1vh;
+    font-size: 0.8em; /* keep the source part small */
     margin-top: 1vw;
-}
+  }
+
+
+  .filter-key-color {
+    height: 2vh; /* adjust this value as needed */
+    width: 2vh; /* adjust this value as needed */
+    margin-right: 0.5vw;
+    margin-left: 2px; /* remove left margin */
+  }
+  
+  .filter-key-contain {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em; /* make the legend labels larger */
+    margin-left: 0; /* remove left margin */
+  }

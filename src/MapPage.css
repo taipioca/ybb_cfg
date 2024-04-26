@@ -1,29 +1,29 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgb(255, 255, 255);
-  }
-  
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+}
+
 .map-page {
-    display: flex;
-    height: 95vh; /* take up the full height of the parent */
-    width: 100%; /* take up the full width of the parent */
+  display: flex;
+  height: 95vh; /* take up the full height of the parent */
+  width: 100%; /* take up the full width of the parent */
 }
 
 .Filters {
-    flex: 2;
-    margin-right: 2%;
-
+  flex: 1.5;
+  margin-right: 2%;
 }
 
 .Filters img {
-    width: 80%;
+  width: 80%;
 }
 
 .MainMap {
-    flex: 5;
-    border-radius: 1%;
-    overflow: hidden;
+  flex: 5;
+  border-radius: 1%;
+  overflow: hidden;
 }
