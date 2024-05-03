@@ -36,10 +36,13 @@ const getLayer = async (neighborhoodData, setNeighborhood, setLocation, setCurso
     stroked: true,
     filled: true,
     // extruded: filter ? true: false,
+    // extruded: filter ? true: false,
     wireframe: true,
     getPolygon: d => d.contours,
     getLineColor: filter ? [255, 255, 255]: [0, 0, 0],
+    getLineColor: filter ? [255, 255, 255]: [0, 0, 0],
     getFillColor: d=> d.color,
+    // getElevation: d-> d.elevation,
     // getElevation: d-> d.elevation,
     getLineWidth: 30,
     onHover: (info, event)=>{

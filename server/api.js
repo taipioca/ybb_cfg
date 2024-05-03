@@ -10,5 +10,4 @@ router.get("/getdata", async (req, res)=>{
     const neighborhoodData = await db_operations.getNeighborhoods()
     res.send(neighborhoodData)
 })
-
 module.exports = router;

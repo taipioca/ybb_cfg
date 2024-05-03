@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { cleanStat } from "../utilites";
 import "./Infowindow.css";
 const NeighborhoodInfoWindowComponent = ({ neighborhood }) => {
@@ -14,15 +15,14 @@ const NeighborhoodInfoWindowComponent = ({ neighborhood }) => {
   });
   return (
     <div className="info-window-container">
-      {/* <div className="image-container">
-            <img src="https://placehold.co/600x400"/>
-        </div> */}
-      <div className="info-container">
-        <h1>{neighborhood.name}</h1>
-        {statistics}
-      </div>
-    </div>
-  );
-};
+        <div className="image-container">
+            <img src={`../neighborhood_imgs/${neighborhood.name}.jpeg`}/>
+        </div>
+        <div className="info-container">
+            <h1>{neighborhood.name}</h1>
+            {statistics}
+        </div>
+    </div>)
+}
 
 export default NeighborhoodInfoWindowComponent;
