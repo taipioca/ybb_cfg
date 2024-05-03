@@ -27,3 +27,10 @@ html {
   border-radius: 1%;
   overflow: hidden;
 }
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5%;
+}

@@ -10,26 +10,31 @@ const Filters = ({ filters, setActiveFilter, activeFilter }) => {
   return (
     <div>
       <p className="left-align-text component-spacing">
-        Lorem ipsum dolor sit amet. Non omnis neque sed atque laboriosam qui
-        eveniet vero. Non nihil eius et aspernatur pariatur ut sapiente
-        obcaecati. Nam sequi internos aut quisquam odio et facilis nulla aut
-        voluptatem dolore rem autem totam eum dolor excepturi id vero possimus!
-        Sit pariatur dolorum qui beatae repudiandae qui quidem quia qui pariatur
-        soluta id incidunt earum ea consectetur dolor aut consequatur illo. Aut
-        velit rerum ad magni aliquam et sunt velit est corporis itaque aut
-        ducimus omnis hic harum aspernatur. Sit voluptatem consequatur sed ipsam
-        officia cum officia voluptate qui eaque dolore non voluptas nemo et
-        consequatur minus. Et reiciendis itaque qui molestias fugit qui minima
-        fugit ut dicta unde eos suscipit reiciendis.
+        YouthBuild Boston (YBB) was founded in 1990 with the goal of providing
+        underserved young people with the support and credentials needed to
+        successfully enter the construction and design industry. YouthBuild
+        Boston envisions a city rich with opportunity for all young people, and
+        a building trades sector which is diverse, equitable and inclusive. We
+        envision a region with a strong supply of affordable housing and an
+        economy which provides pathways for everyone to thrive.
       </p>
-      <h2 className="component-spacing">Map Filter</h2>
+
+
+      <p className="left-align-text component-spacing">
+        Use this interactive map to explore the projects that YouthBuild Boston
+        has worked on in the Greater Boston area. Click on the markers to learn
+        more about each project. Click on filters to see projects by category,
+        as well as community distribution in various statistics.
+      </p>
+
+      <h2 className="filter-title-spacing">Choose a Map Filter</h2>
       <Dropdown
         filters={filters}
         setActiveFilter={setActiveFilter}
         activeFilter={activeFilter}
         className="component-spacing"
       />
-      <h2 className="component-spacing">Project Categories </h2>
+      <h2 className="filter-title-spacing">Project Categories </h2>
       <CheckboxComponent
         values={[
           { value: "house", label: "Affordable Housing" },

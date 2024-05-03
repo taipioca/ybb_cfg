@@ -50,3 +50,10 @@
 .left-align-text {
   text-align: left;
 }
+
+
+.filter-title-spacing {
+  font-size: 1.1em;
+  margin-top: 6%;
+  margin-bottom: 3%;
+}

@@ -12,7 +12,7 @@ const MapPage = () => {
       <div className="Filters">
         <img
           src="https://static1.squarespace.com/static/57c8793737c5815de7211a69/t/5f735805247890308cea26de/1601394700668/YBB+footer+logo-04.png?format=1500w"
-          alt="Logo"
+          alt="Logo" className="logo-container"
         />
         <Filters
           filters={filters}
