@@ -1,7 +1,7 @@
 import { InfoWindow } from "@vis.gl/react-google-maps";
 import React from "react";
 import NeighborhoodInfoWindowComponent from "./NeighborhoodWindowComponent";
-import "./Infowindow.css";
+import "./NeighborhoodInfoWindow.css";
 const NeighborhoodModal = ({neighborhood, setNeighborhood, map, location})=>{
     map.setCenter(location);
     map.setZoom(13)

@@ -2,11 +2,21 @@ import "./MapPage.css";
 import MainMap from "./Map";
 import Filters from "./Filters";
 import React, { useState } from "react";
+import { getLocations } from "../utilites";
 
 const MapPage = () => {
   const [activeFilter, setActiveFilter] = useState("Select Filter");
-  const [filters, setFilters] = useState(null);
-
+  const [filters, setFilters] = useState(["Redlining Overlay", "Urban Heat Islands Overlay"]);
+  const [locations, setLocations] = useState(false)
+  const [categories, setCategories] = useState([])
+  const [activeCategories, setActiveCategories] = useState([])
+  useState(()=>{
+    getLocations().then((response)=>{
+      setLocations(response[0])
+      setCategories(response[1])
+      setActiveCategories(response[1])
+    })
+  }, [])
   return (
     <div className="map-page">
       <div className="Filters">
@@ -18,13 +28,18 @@ const MapPage = () => {
           filters={filters}
           setActiveFilter={setActiveFilter}
           activeFilter={activeFilter}
+          categories={categories}
+          activeCategories={activeCategories}
+          setActiveCategories={setActiveCategories}
         />
       </div>
       <div className="MainMap">
         <MainMap
           filters={filters}
           setFilters={setFilters}
+          activeCategories={activeCategories}
           activeFilter={activeFilter}
+          locations={locations}
         />
       </div>
     </div>

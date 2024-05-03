@@ -21,7 +21,7 @@ const intializeClient = async () => {
 };
 
 // Makes an api to google's Geocoder and logs lat and lng of first result
-const getLatLng = async (address) => {
+const getLatLng= async (address) => {
         return axios
         .get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GEOCODE_API_KEY}`
@@ -92,21 +92,28 @@ const getLocations = async () => {
   const getRows = await googleSheets.spreadsheets.values.get({
     auth,
     spreadsheetId: YBB_PROJECTS_SPREADSHEETID,
-    range: "In Use",
+    range: "Working Document",
   });
   getRows.data.values.shift();
+  const categories = new Set()
   const locations = await Promise.all(
     getRows.data.values.map(async (place) => {
       const position = await getLatLng(place[0]);
+      if (place[1]){
+        categories.add(place[1])
+      }
       return {
         position,
         address: place[0],
         type: place[1],
-        description: place[2] ? place[2] : null,
+        year: place[2] ? place[2] : null,
+        image: place[3] ? place[3]: null,
+        name: place[4] ? place[4]: null,
+        description: place[5] ? place[5] : null,
       };
     })
   );
-  return locations;
+  return [locations, Array.from(categories)];
 };
 
 module.exports = { getLocations, getNeighborhoods };

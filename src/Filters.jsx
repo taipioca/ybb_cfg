@@ -6,7 +6,7 @@ import AccordionNew from "./modules/Accordion-new";
 import Dropdown from "./modules/DropdownMenu";
 import "./Filters.css";
 
-const Filters = ({ filters, setActiveFilter, activeFilter }) => {
+const Filters = ({ filters, setActiveFilter, activeFilter, categories, activeCategories, setActiveCategories }) => {
   return (
     <div>
       <p className="left-align-text component-spacing">
@@ -36,11 +36,9 @@ const Filters = ({ filters, setActiveFilter, activeFilter }) => {
       />
       <h2 className="filter-title-spacing">Project Categories </h2>
       <CheckboxComponent
-        values={[
-          { value: "house", label: "Affordable Housing" },
-          { value: "food", label: "Sustainable Food systems" },
-          { value: "community", label: "Community Partners" },
-        ]}
+        categories={categories}
+        activeCategories={activeCategories}
+        setActiveCategories={setActiveCategories}
       />
     </div>
   );

@@ -1,6 +1,10 @@
 import React from "react";
 import "./Legend.css"
+import RedliningLegend from "./RedliningLegend";
 const Legend = ({filter}) =>{
+    if (filter.title == "Redlining Overlay"){
+        return (<RedliningLegend/>)
+    }
     const keys = filter.keys.map((key, index)=>{
         return(
             <div key={index} className="filter-key-contain">

@@ -1,0 +1,17 @@
+.info-window-container {
+    padding: 10px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+  .row-container {
+    display: flex;
+    margin-top: 1.3%; /* adjust this value as needed */
+  }
+  
+
+  .stat-style {
+    font-weight: bold;
+    margin-left: 5px; /* adjust this value as needed */
+  }

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
 import {AdvancedMarker, InfoWindow, useMarkerRef} from '@vis.gl/react-google-maps';
-import { IconHome, IconMapPin, IconSchool } from "@tabler/icons-react";
+import { IconApple, IconHeartHandshake, IconHome, IconMapPin } from "@tabler/icons-react";
 import LocationInfoWindowComponent from "./LocationInfoWindow";
 
 const SingleMarker = ({location, map}) => {
     const [markerRef, marker] = useMarkerRef();
     const [infowindowOpen, setInfowindowOpen] = useState(false);
-    const icons = {House: <IconHome fill={"blue"} color={"white"}/>, School: <IconSchool fill={"purple"} color={"white"}/>, Other: <IconMapPin fill={"green"} color={"white"}/>}
+    const icons = {"Affordable Housing": <IconHome fill={"blue"} color={"white"}/>, "Community Partners": <IconHeartHandshake fill={"purple"} color={"white"}/>,  "Sustainable Food Systems": <IconApple fill={"green"}/>, Other: <IconMapPin fill={"green"} color={"white"}/>}
     return(
         <>
         <AdvancedMarker ref={markerRef} label={location.type} position={location.position} onClick={()=>{
@@ -16,7 +16,7 @@ const SingleMarker = ({location, map}) => {
           }}>
             {icons[location.type]}
         </AdvancedMarker>
-        {location.description && infowindowOpen && (
+        {location.address && infowindowOpen && (
         <InfoWindow
           anchor={marker}
           maxWidth={"fit-content"}
