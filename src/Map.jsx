@@ -9,8 +9,7 @@ import getLayer from "./GenerateLayers";
 import Legend from "./Legend";
 import { getNeighborhoodData } from "../utilites";
 import NeighborhoodModal from "./NeighborhoodInfoWindow";
-const MainMap = ({setFilters, activeFilter}) => {
-    const [locations, setLocations] = useState(false);
+const MainMap = ({setFilters, activeFilter, activeCategories, locations}) => {
     const [overlay, setOverlay] = useState(false)
     const [neighborhoodData, setNeighborhoodData] = useState(false)
     const [keys, setKeys] = useState(false)
@@ -18,13 +17,13 @@ const MainMap = ({setFilters, activeFilter}) => {
     const [location, setLocation] = useState()
     const [cursor, setCursor] = useState(false)
     const map = useMap()
-    let markers;
+    const [markers, setMarkers] = useState(null);
 
     useEffect(()=>{
-        getLocations().then((response)=>{setLocations(response)})
+        
         getNeighborhoodData().then((data)=>{
             setNeighborhoodData(data)
-            setFilters([...data.filters, "None"])
+            setFilters([...data.filters, "Redlining Overlay", "None"])
             getLayer(data, setClickedNeighborhood, setLocation, setCursor).then((layer)=>{setOverlay(layer)})
         })
     },[])
@@ -47,19 +46,19 @@ const MainMap = ({setFilters, activeFilter}) => {
         }
     }, [activeFilter])
 
-    if (locations){
-        markers = locations.map((location, key)=>{
-            return(
-            <SingleMarker key={key} location={location} map={map}/>
-            )
-        })
-    }
+    useEffect(()=>{
+        if (locations){
+            setMarkers(locations.map((location, key)=>{
+                if ((activeCategories.includes(location.type))){
+                    return(
+                    <SingleMarker key={key} location={location} map={map}/>
+                    )}
+            }))
+        }
+    }, [locations, activeCategories])
+    
     return(
     <div className='mappy'>
-        {/* <button style={{backgroundColor: "grey"}}onClick={()=>{
-            if (!activeFilter) setActiveFilter("Median Household Income (2015)")
-            else setActiveFilter(false)
-            }}>press me to show Median Household Income (2015)</button> */}
         <Map
         mapId={'828c076a50ba3ed0'}
         defaultCenter={{lat: 42.3200, lng: -71.0589}}

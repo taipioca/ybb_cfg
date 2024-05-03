@@ -11,9 +11,25 @@
     align-items: self-start;
 }
 
+.no-image{
+    padding: 1vh;
+}
+
 .info-container p{
     font-size: 1.3vh;
     margin-bottom: .1vh;
+}
+
+.type-address{
+    display: flex;
+    width: 100%;
+    min-width: 20vw;
+    justify-content: space-between;
+}
+
+.type{
+    justify-content: flex-start;
+    font-weight: bolder;
 }
 
 .info-container h1{

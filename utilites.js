@@ -1,7 +1,7 @@
 async function getLocations() {
     const response = await fetch("http://localhost:1793/api/getlocations");
-    const locations = response.json();
-    return locations
+    const [locations, categories] = await response.json();
+    return [locations, categories]
 }
 async function getNeighborhoodData(){
     const response = await fetch("http://localhost:1793/api/getdata");

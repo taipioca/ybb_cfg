@@ -1,12 +1,12 @@
 import React from "react";
 import { CheckboxGroup, Checkbox } from "@nextui-org/react";
 
-export default function CheckboxComponent({ values }) {
+export default function CheckboxComponent({ categories, activeCategories, setActiveCategories }) {
   return (
-    <CheckboxGroup defaultValue={values.map((value) => value.value)}>
-      {values.map((value) => (
-        <Checkbox key={value.value} value={value.value}>
-          {value.label}
+    <CheckboxGroup value={activeCategories} onValueChange={setActiveCategories}>
+      {categories.map((value, index) => (
+        <Checkbox key={index} value={value}>
+          {value}
         </Checkbox>
       ))}
     </CheckboxGroup>
