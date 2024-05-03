@@ -8,6 +8,7 @@ async function getNeighborhoodData(){
     const neighborhoodData = response.json();
     return neighborhoodData
 }
+
 const cleanNumber =  (x)=> {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
