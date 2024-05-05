@@ -6,7 +6,7 @@ import LocationInfoWindowComponent from "./LocationInfoWindow";
 const SingleMarker = ({location, map}) => {
     const [markerRef, marker] = useMarkerRef();
     const [infowindowOpen, setInfowindowOpen] = useState(false);
-    const icons = {"Affordable Housing": <IconHome fill={"blue"} color={"white"}/>, "Community Partners": <IconHeartHandshake fill={"purple"} color={"white"}/>,  "Sustainable Food Systems": <IconApple fill={"green"}/>, Other: <IconMapPin fill={"green"} color={"white"}/>}
+    const icons = {"Affordable Housing": <IconHome fill={"blue"} color={"white"}/>, "Community Partners": <IconHeartHandshake fill={"purple"} color={"white"}/>,  "Sustainable Food Systems": <IconApple fill={"green"}/>, other: <IconMapPin fill={"orange"} color={"white"}/>}
     return(
         <>
         <AdvancedMarker ref={markerRef} label={location.type} position={location.position} onClick={()=>{
@@ -14,7 +14,7 @@ const SingleMarker = ({location, map}) => {
           map.setCenter(location.position)
           map.setZoom(13)
           }}>
-            {icons[location.type]}
+            {icons[location.type] ? icons[location.type]: icons.other}
         </AdvancedMarker>
         {location.address && infowindowOpen && (
         <InfoWindow
