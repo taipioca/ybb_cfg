@@ -17,30 +17,38 @@ const createKeys = (max) => {
     return [
       {
         name: `More than ${Math.ceil((max * 0.75) / 5) * 5}%`,
-        color: "rgb(110, 0, 127)",
+        color: "rgb(205, 98, 230)",
       },
       {
         name: `More than ${Math.ceil((max * 0.5) / 5) * 5}%`,
-        color: "rgb(110, 0, 127)",
+        color: "rgb(155, 60, 183)",
       },
       {
         name: `Less than ${Math.ceil((max * 0.2) / 5) * 5}%`,
-        color: "rgb(110, 0, 255)",
+        color: "rgb(80, 30, 110)",
+      },
+      {
+        name: `Not Reported`,
+        color: "rgb(200,200,200)",
       },
     ];
   }
   return [
     {
       name: `More than $${cleanNumber(Math.ceil((max * 0.75) / 1000) * 1000)}`,
-      color: "rgb(110, 0, 127)",
+      color: "rgb(205, 98, 230)",
     },
     {
       name: `More than $${cleanNumber(Math.ceil((max * 0.5) / 1000) * 1000)}`,
-      color: "rgb(110, 0, 191)",
+      color: "rgb(155, 60, 183)",
     },
     {
       name: `Less than $${cleanNumber(Math.ceil((max * 0.25) / 1000) * 1000)}`,
-      color: "rgb(110, 0, 255)",
+      color: "rgb(80, 30, 110)",
+    },
+    {
+      name: `Not Reported`,
+      color: "rgb(200,200,200)",
     },
   ];
 };

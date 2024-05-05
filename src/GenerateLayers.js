@@ -17,7 +17,7 @@ const getLayer = async (neighborhoodData, setNeighborhood, setLocation, setCurso
     (currentNeighborhood[filter]/neighborhoodData.maxes[filter])*1000 
     : 0
     currentNeighborhoodColor = (filter && currentNeighborhood[filter]) ? 
-    [110, 0, 100 + (currentNeighborhood[filter]/neighborhoodData.maxes[filter])*127]
+    [80 + (currentNeighborhood[filter]/neighborhoodData.maxes[filter])*150, 30 + (currentNeighborhood[filter]/neighborhoodData.maxes[filter])*90, 110 + (currentNeighborhood[filter]/neighborhoodData.maxes[filter])*150]
     : [200, 200, 200]
     polygonData.push({
         contours: neighborhoods[neighborhood_name], 

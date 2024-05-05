@@ -1,5 +1,5 @@
 import React from "react";
-import { Select, SelectItem } from "@nextui-org/react";
+import { Select, SelectItem, SelectSection } from "@nextui-org/react";
 import "./DropdownMenu.css";
 
 export default function Menu({ filters, setActiveFilter, activeFilter }) {
@@ -13,12 +13,16 @@ export default function Menu({ filters, setActiveFilter, activeFilter }) {
         setActiveFilter(value === "None" ? false : value);
       }}
     >
-      {filters &&
-        filters.map((filter) => (
-          <SelectItem key={filter} value={filter}>
-            {filter}
-          </SelectItem>
-        ))}
+      <SelectSection title="Socioeconomic Filters" showDivider>
+        {filters &&
+          filters.map((filter) => (
+            <SelectItem key={filter} value={filter}>
+              {filter}
+            </SelectItem>
+          ))}
+      </SelectSection>
+      <SelectSection title="Race and Ethnicity" showDivider></SelectSection>
+      <SelectSection title="Other"></SelectSection>
     </Select>
   );
 }

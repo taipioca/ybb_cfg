@@ -1,5 +1,5 @@
 const RedliningLegend = () =>{
-    const redlining_colors = {"A": [38, 113, 45], "B": [16, 32, 145], "C": [214, 154, 64], "D": [96, 32, 138]}
+    const redlining_colors = {"Grade A": [38, 113, 45], "Grade B": [16, 32, 145], "Grade C": [214, 154, 64], "Grade D": [96, 32, 138]}
         const keys = [];
         Object.keys(redlining_colors).forEach(function(grade, _) {
             keys.push(

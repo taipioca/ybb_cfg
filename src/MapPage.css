@@ -14,8 +14,15 @@ html {
 }
 
 .Filters {
-  flex: 1.5;
+  flex: 1.6;
   margin-right: 2%;
+  overflow-y: auto; /* enable vertical scrolling if content is too long */
+  height: 95vh; /* make the Filters take up the full height of the viewport */
+  scrollbar-width: none; /* For Firefox */
+}
+
+.Filters::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari and Opera */
 }
 
 .Filters img {
@@ -23,7 +30,7 @@ html {
 }
 
 .MainMap {
-  flex: 5;
+  flex: 4.7;
   border-radius: 1%;
   overflow: hidden;
 }

@@ -18,12 +18,6 @@
   z-index: 1;
 }
 
-.slider {
-  position: absolute;
-  width: 100%;
-  bottom: rem(-1px);
-}
-
 .thumb {
   width: rem(16px);
   height: rem(16px);
@@ -42,7 +36,6 @@
   border-radius: 0;
 }
 
-
 .component-spacing {
   margin-top: 20px; /* adjust this value as needed */
 }
@@ -50,7 +43,6 @@
 .left-align-text {
   text-align: left;
 }
-
 
 .filter-title-spacing {
   font-size: 1.1em;
