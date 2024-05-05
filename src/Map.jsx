@@ -22,7 +22,7 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations }) => {
   useEffect(() => {
     getNeighborhoodData().then((data) => {
       setNeighborhoodData(data);
-      setFilters([...data.filters, "Redlining Overlay", "None"]);
+      setFilters([...data.filters, {title:"Other", filters: ["Redlining Overlay", "None"]}]);
       getLayer(data, setClickedNeighborhood, setLocation, setCursor).then(
         (layer) => {
           setOverlay(layer);

@@ -6,7 +6,7 @@ import { getLocations } from "../utilites";
 
 const MapPage = () => {
   const [activeFilter, setActiveFilter] = useState("Select Filter");
-  const [filters, setFilters] = useState(["Redlining Overlay", "Urban Heat Islands Overlay"]);
+  const [filters, setFilters] = useState(false);
   const [locations, setLocations] = useState(false)
   const [categories, setCategories] = useState([])
   const [activeCategories, setActiveCategories] = useState([])

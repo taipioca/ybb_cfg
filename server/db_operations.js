@@ -49,38 +49,43 @@ const getNeighborhoods = async () => {
   });
   // Get all the rows from these sheets
   spreadsheetData = spreadsheetData.data.valueRanges.map(
-    (sheet) => sheet.values
+    (sheet) => {return ({"values": sheet.values, "title": sheet.range.split("'")[1],})}
   );
   // Intializing the dictionary we'll return
-  const neighborhoodData = { sources: {}, filters: [], maxes: {} };
+  const neighborhoodData = { sources: {}, filters: [], maxes: {}, images: {} };
   let sheetStats;
   let source;
   let i;
   // For each sheet populate the dictionary with it's statistics
   spreadsheetData.forEach((sheet, index) => {
-    sheetStats = sheet.shift().slice(1);
-    source = sheet.pop()[0];
-    maxes = sheet.pop().slice(1);
-    neighborhoodData["filters"].push(...sheetStats);
-    // Get maxes
-    for (i = 0; i < sheetStats.length; i++) {
-      neighborhoodData["maxes"][sheetStats[i]] = maxes[i];
+    sheetStats = sheet.values.shift().slice(1);
+    if (sheet.title == "Neighborhood Images"){
+      sheet.values.forEach((neighborhood) => {
+      neighborhoodData[neighborhood[0]] = {...neighborhoodData[neighborhood[0]], image: neighborhood[1] ? neighborhood[1] : null, }})
     }
-    // Get all statistics for each neighborhood
-    sheet.forEach((neighborhood) => {
+    else{
+      source = sheet.values.pop()[0];
+      maxes = sheet.values.pop().slice(1);
+      neighborhoodData["filters"].push({title: sheet.title, filters: sheetStats});
+      // Get maxes
       for (i = 0; i < sheetStats.length; i++) {
-        if (neighborhood[i + 1]) {
-          neighborhoodData[neighborhood[0]] = {
-            ...neighborhoodData[neighborhood[0]],
-            [sheetStats[i]]: neighborhood[i + 1],
+        neighborhoodData["maxes"][sheetStats[i]] = maxes[i];
+      }
+      // Get all statistics for each neighborhood
+      sheet.values.forEach((neighborhood) => {
+        for (i = 0; i < sheetStats.length; i++) {
+          if (neighborhood[i + 1]) {
+            neighborhoodData[neighborhood[0]] = {
+              ...neighborhoodData[neighborhood[0]],
+              [sheetStats[i]]: neighborhood[i + 1],
+            };
+          }
+          neighborhoodData["sources"] = {
+            ...neighborhoodData["sources"],
+            [sheetStats[i]]: source,
           };
         }
-        neighborhoodData["sources"] = {
-          ...neighborhoodData["sources"],
-          [sheetStats[i]]: source,
-        };
-      }
-    });
+      });}
   });
   return neighborhoodData;
 };
