@@ -1,13 +1,20 @@
+const API_URL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:1793"
+    : "https://ybb-cfg24.vercel.app/";
+
 async function getLocations() {
-  const response = await fetch("http://localhost:1793/api/getlocations");
+  const response = await fetch(`${API_URL}/api/getlocations`);
   const [locations, categories] = await response.json();
   return [locations, categories];
 }
+
 async function getNeighborhoodData() {
-  const response = await fetch("http://localhost:1793/api/getdata");
+  const response = await fetch(`${API_URL}/api/getdata`);
   const neighborhoodData = response.json();
   return neighborhoodData;
 }
+
 const cleanNumber = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
