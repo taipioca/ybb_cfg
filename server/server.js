@@ -1,10 +1,15 @@
 const express = require("express");
+const path = require("path");
 const axios = require("axios");
 const { google } = require("googleapis");
 const http = require("http");
 const cors = require("cors");
 const app = express();
 const api = require("./api");
+
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, "dist")));
+
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://ybb-cfg.onrender.com/"],
@@ -24,6 +29,11 @@ app.use((err, req, res, next) => {
     status: status,
     message: err.message,
   });
+});
+
+// Anything that doesn't match the above, send back the index.html file
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/dist/index.html"));
 });
 
 // hardcode port to 3000 for now

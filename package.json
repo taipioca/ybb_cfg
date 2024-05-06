@@ -8,7 +8,9 @@
     "dev:backend": "nodemon server/index.js",
     "dev": "concurrently 'npm:dev:frontend' 'npm:dev:backend'",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build": "vite build",
+    "start": "node server/server.js"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
