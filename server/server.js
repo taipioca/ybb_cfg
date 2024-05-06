@@ -7,7 +7,7 @@ const app = express();
 const api = require("./api");
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://ybb-cfg24.vercel.app/"],
+    origin: ["http://localhost:5173", "https://ybb-cfg.onrender.com/"],
   })
 );
 app.use("/api", api);
