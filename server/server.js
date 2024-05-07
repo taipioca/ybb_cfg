@@ -33,7 +33,7 @@ app.use((err, req, res, next) => {
 
 // Anything that doesn't match the above, send back the index.html file
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "../dist/index.html"));
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
 // hardcode port to 3000 for now
