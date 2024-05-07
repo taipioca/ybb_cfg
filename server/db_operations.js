@@ -6,19 +6,12 @@ const YBB_NEIGHBORHOODS_SPREADSHEETID =
   process.env.YBB_NEIGHBORHOODS_SPREADSHEETID;
 const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
-// console.log("credentials:", credentials);
 
 const intializeClient = async () => {
   const auth = new google.auth.GoogleAuth({
     credentials: credentials,
     scopes: "https://www.googleapis.com/auth/spreadsheets",
   });
-
-  // const intializeClient = async () => {
-  //   const auth = new google.auth.GoogleAuth({
-  //     keyFile: "server/credentials.json",
-  //     scopes: "https://www.googleapis.com/auth/spreadsheets",
-  //   });
 
   // Create client instance for auth
   const client = await auth.getClient();
