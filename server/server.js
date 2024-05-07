@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, "../dist")));
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://ybb-cfg.onrender.com/"],
+    origin: ["http://localhost:5173", "https://ybb-cfg.onrender.com"],
   })
 );
 app.use("/api", api);

@@ -1,7 +1,7 @@
 const API_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:1793"
-    : "https://ybb-cfg.onrender.com/";
+    : "https://ybb-cfg.onrender.com";
 
 async function getLocations() {
   console.log("getLocations()");
