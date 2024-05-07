@@ -11,7 +11,7 @@ const getLayer = async (
     return getRedliningLayer();
   }
 
-  const neighborhoods = await fetch("./neighborhoods.json").then((data) =>
+  const neighborhoods = await fetch("/neighborhoods.json").then((data) =>
     data.json()
   );
   const polygonData = [];
