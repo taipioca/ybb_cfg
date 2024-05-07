@@ -4,12 +4,14 @@ const API_URL =
     : "https://ybb-cfg.onrender.com/";
 
 async function getLocations() {
+  console.log("getLocations()");
   const response = await fetch(`${API_URL}/api/getlocations`);
   const [locations, categories] = await response.json();
   return [locations, categories];
 }
 
 async function getNeighborhoodData() {
+  console.log("getNeighborhoodData()");
   const response = await fetch(`${API_URL}/api/getdata`);
   const neighborhoodData = response.json();
   return neighborhoodData;
