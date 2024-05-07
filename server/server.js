@@ -32,9 +32,9 @@ app.use((err, req, res, next) => {
 });
 
 // Anything that doesn't match the above, send back the index.html file
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../dist/index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../dist/index.html"));
+// });
 
 // hardcode port to 1793 for local development purposes
 const port = process.env.PORT || 1793;
