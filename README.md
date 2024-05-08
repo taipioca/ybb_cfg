@@ -13,33 +13,35 @@ The map on the website primarily has two features:
 # Detailed below is what you can and can't do to each spreadsheet without causing unexpected results:
 
 - # YBB Projects
-  - # Cans
+
+  - Cans
     - Add locations with an address, category, year, image, site name, and description
     - Omit a site name, year, image, and description
     - Give a custom category name (will show up on the map with a generic icon but the category name will be shown in the project's info window)
     - Enter a valid image url in the image column for an image to appear in the project's info window
     - Remove projects
     - Modify projects
-  - # Cannots
+  - Cannots
     - Add an extra column
     - Remove a column
     - Omit an address or category from a new project entry
     - Add an incomplete project
     - Remove top row
     - Rename sheet
-  - # Should nots (aesthetic purposes)
+  - Should nots (aesthetic purposes)
     - Projects with empty description columns
     - Projects with empty images columns
     - Projects without site name columns
+
 - # Mapping Project Filters
-  - # Cans
+  - Cans
     - Add sheets representing a new category of overlays
     - Add arbitrarily many overlays (columns)
     - Add arbitrarily many overlay categories (sheets)
     - Omit certain statistics for certain neighborhoods (region will appear grey)
     - Add images for certain neighborhoods in the Neighborhood Images Sheet
     - Omit images for certain neighborhoods in Neihhborhood Images Sheet (will default to images stored on site when user clicks on region)
-  - # Cannots
+  - Cannots
     - Add new neighborhood(s) (must add to neighborhoods.json (file mapping neighborhood names to neighborhood shapes))
     - Remove neighborhood(s)
     - Have any statistics that are not $ or % (code assumes the stats are one of the following)
@@ -52,6 +54,6 @@ The map on the website primarily has two features:
 
 # Detailed below is how you can add projects/filters
 
-- # Adding a Project
-- # Adding a Filter Category
-  - # Adding a Filter
+- Adding a Project
+- Adding a Filter Category
+  - Adding a Filter
