@@ -11,7 +11,7 @@ const LocationInfoWindowComponent = ({location})=>{
             <p className="type"><strong>{location.type}</strong></p>
             {location.name ? <p className="address">{location.address}</p>: null}
             </div>
-            <p>Description: {location.description}</p>
+            {location.description ? <p>Description: {location.description}</p>: null}
         </div>
     </div>)
 }
