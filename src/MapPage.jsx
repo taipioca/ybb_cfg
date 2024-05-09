@@ -10,11 +10,13 @@ const MapPage = () => {
   const [locations, setLocations] = useState(false)
   const [categories, setCategories] = useState([])
   const [activeCategories, setActiveCategories] = useState([])
+  const [icons, setIcons] = useState({})
   useState(()=>{
     getLocations().then((response)=>{
       setLocations(response[0])
       setCategories(response[1])
       setActiveCategories(response[1])
+      setIcons(response[2])
     })
   }, [])
   return (
@@ -40,6 +42,7 @@ const MapPage = () => {
           activeCategories={activeCategories}
           activeFilter={activeFilter}
           locations={locations}
+          icons={icons}
         />
       </div>
     </div>

@@ -9,7 +9,7 @@ import getLayer from "./GenerateLayers";
 import Legend from "./Legend";
 import { getNeighborhoodData } from "../utilites";
 import NeighborhoodModal from "./NeighborhoodInfoWindow";
-const MainMap = ({ setFilters, activeFilter, activeCategories, locations }) => {
+const MainMap = ({ setFilters, activeFilter, activeCategories, locations, icons }) => {
   const [overlay, setOverlay] = useState(false);
   const [neighborhoodData, setNeighborhoodData] = useState(false);
   const [keys, setKeys] = useState(false);
@@ -64,16 +64,17 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations }) => {
   }, [activeFilter]);
 
   useEffect(() => {
-    if (locations) {
+    console.log(icons)
+    if (locations && icons) {
       setMarkers(
         locations.map((location, key) => {
           if (activeCategories.includes(location.type)) {
-            return <SingleMarker key={key} location={location} map={map} />;
+            return <SingleMarker key={key} location={location} map={map} markers={icons} />;
           }
         })
       );
     }
-  }, [locations, activeCategories]);
+  }, [locations, activeCategories, icons]);
 
   return (
     <div className="mappy">

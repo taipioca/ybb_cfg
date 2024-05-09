@@ -29,6 +29,8 @@ const getLatLng= async (address) => {
         .then((response) => response.data.results[0].geometry.location);
 };
 
+
+
 const getNeighborhoods = async () => {
   const [auth, googleSheets] = await intializeClient();
   const spreadsheetInfo = await googleSheets.spreadsheets.get({
@@ -94,15 +96,21 @@ const getLocations = async () => {
   // Get metadata about spreadsheet
   // Read rows from spreadsheet
 
-  const getRows = await googleSheets.spreadsheets.values.get({
+  const getLocationRows = await googleSheets.spreadsheets.values.get({
     auth,
     spreadsheetId: YBB_PROJECTS_SPREADSHEETID,
     range: "Working Document",
   });
-  getRows.data.values.shift();
+  const getCatsRows = await googleSheets.spreadsheets.values.get({
+    auth,
+    spreadsheetId: YBB_PROJECTS_SPREADSHEETID,
+    range: "Categories",
+  })
+  getCatsRows.data.values.shift()
+  getLocationRows.data.values.shift();
   const categories = new Set()
   const locations = await Promise.all(
-    getRows.data.values.map(async (place) => {
+    getLocationRows.data.values.map(async (place) => {
       const position = await getLatLng(place[0]);
       if (place[1]){
         categories.add(place[1])
@@ -118,7 +126,12 @@ const getLocations = async () => {
       };
     })
   );
-  return [locations, Array.from(categories)];
+
+  const markers = {}
+  getCatsRows.data.values.forEach((category) => {
+      markers[category[0]] = category[1] ? category[1] : null
+    })
+  return [locations, Array.from(categories), markers];
 };
 
 module.exports = { getLocations, getNeighborhoods };
