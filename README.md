@@ -68,10 +68,10 @@ The map on the website primarily has two features:
     - Add a column with the first cell set as the filter name and the remaining column's cells set as the the statistic for the neighborhood in the corresponding row
       - **Note:** The final cell in the column should be the maximum value of the filter across the neighborhoods
   - If unclear reference previous sheets, ex. one filter category is Race and Ethnicity with the filters Percent White, Percent Black, etc. and source of "2010 Census Data"
-- Adding images of neighborhoods
-  - To set the image that pops up in the info window when one clicks on the neighborhood,
-    paste an image address in the cell next to the corresponding neighborhood in the Neighborhood Images sheet
-    found in the Mapping Project Filters Spreadsheet
-  - By default if no image is provided, the website will refer to images on the web server
-    - **Note:** We **strongly** suggest these images are set. Some of the images on the web server
-      are copyrighted.
+  - Adding images of neighborhoods
+    - To set the image that pops up in the info window when one clicks on the neighborhood,
+      paste an image address in the cell next to the corresponding neighborhood in the Neighborhood Images sheet
+      found in the Mapping Project Filters Spreadsheet
+    - By default if no image is provided, the website will refer to images on the web server
+      - **Note:** We **strongly** suggest these images are set. Some of the images on the web server
+        are copyrighted.
