@@ -4,9 +4,12 @@ import "./DropdownMenu.css";
 
 export default function Menu({ filters, setActiveFilter, activeFilter }) {
   const [options, setOptions] = useState(null); 
+
   useEffect(()=>{
+    // Respond to changes in filters
     if (filters){
       setOptions(filters.map((filter)=>{
+        // if filter is not a string it is a filter category
         if ((typeof(filter) != "string")){
           return(
           <SelectSection key={filter.title} title={filter.title} showDivider>

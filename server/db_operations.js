@@ -20,7 +20,7 @@ const intializeClient = async () => {
   return [auth, googleSheets];
 };
 
-// Makes an api to google's Geocoder and logs lat and lng of first result
+// Given a valid address returns a corresponding lat and lng using google's geocode api
 const getLatLng= async (address) => {
         return axios
         .get(
@@ -40,36 +40,38 @@ const getNeighborhoods = async () => {
   const sheets = spreadsheetInfo.data.sheets.map(
     (sheet) => sheet.properties.title
   );
-  // Get metadata about spreadsheet
 
-  // All the sheets from the spreadsheet
+  // Get all the sheets from the spreadsheet
   let spreadsheetData = await googleSheets.spreadsheets.values.batchGet({
     auth,
     spreadsheetId: YBB_NEIGHBORHOODS_SPREADSHEETID,
     ranges: [sheets],
     valueRenderOption: "UNFORMATTED_VALUE",
   });
-  // Get all the rows from these sheets
+  // Make a variable representing a single sheet (values: rows of sheet, title: sheet title)
   spreadsheetData = spreadsheetData.data.valueRanges.map(
     (sheet) => {return ({"values": sheet.values, "title": sheet.range.split("'")[1],})}
   );
-  // Intializing the dictionary we'll return
+  // Intializing the dictionary we'll return representing the neighborhoodData
   const neighborhoodData = { sources: {}, filters: [], maxes: {}, images: {} };
   let sheetStats;
   let source;
   let i;
-  // For each sheet populate the dictionary with it's statistics
+  // For each sheet, populate the dictionary with it's statistics
   spreadsheetData.forEach((sheet, index) => {
+    // Removing top row which contains filter names
     sheetStats = sheet.values.shift().slice(1);
+
     if (sheet.title == "Neighborhood Images"){
       sheet.values.forEach((neighborhood) => {
       neighborhoodData[neighborhood[0]] = {...neighborhoodData[neighborhood[0]], image: neighborhood[1] ? neighborhood[1] : null, }})
     }
+
     else{
       source = sheet.values.pop()[0];
       maxes = sheet.values.pop().slice(1);
       neighborhoodData["filters"].push({title: sheet.title, filters: sheetStats});
-      // Get maxes
+      // Set maxes
       for (i = 0; i < sheetStats.length; i++) {
         neighborhoodData["maxes"][sheetStats[i]] = maxes[i];
       }
@@ -93,9 +95,6 @@ const getNeighborhoods = async () => {
 };
 const getLocations = async () => {
   const [auth, googleSheets] = await intializeClient();
-  // Get metadata about spreadsheet
-  // Read rows from spreadsheet
-
   const getLocationRows = await googleSheets.spreadsheets.values.get({
     auth,
     spreadsheetId: YBB_PROJECTS_SPREADSHEETID,
@@ -106,9 +105,12 @@ const getLocations = async () => {
     spreadsheetId: YBB_PROJECTS_SPREADSHEETID,
     range: "Categories",
   })
+  // Removing top rows serving only as visual aid to user of spreadsheet
   getCatsRows.data.values.shift()
   getLocationRows.data.values.shift();
+  // Making categorires to keep track of unique categories
   const categories = new Set()
+  // Getting each location object rep
   const locations = await Promise.all(
     getLocationRows.data.values.map(async (place) => {
       const position = await getLatLng(place[0]);
@@ -126,7 +128,7 @@ const getLocations = async () => {
       };
     })
   );
-
+  // Getting markers
   const markers = {}
   getCatsRows.data.values.forEach((category) => {
       markers[category[0]] = category[1] ? category[1] : null

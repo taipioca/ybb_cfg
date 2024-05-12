@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { cleanStat } from "../utilites";
+import { cleanStat } from "../../utilites";
 import "./Infowindow.css";
 const NeighborhoodInfoWindowComponent = ({ neighborhood }) => {
   const statistics = Object.entries(neighborhood).map((entry) => {

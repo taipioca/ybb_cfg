@@ -8,7 +8,7 @@ import { PolygonLayer } from "deck.gl";
 import getLayer from "./GenerateLayers";
 import Legend from "./Legend";
 import { getNeighborhoodData } from "../utilites";
-import NeighborhoodModal from "./NeighborhoodInfoWindow";
+import NeighborhoodModal from "./info_windows/NeighborhoodInfoWindow";
 const MainMap = ({ setFilters, activeFilter, activeCategories, locations, icons }) => {
   const [overlay, setOverlay] = useState(false);
   const [neighborhoodData, setNeighborhoodData] = useState(false);
@@ -18,7 +18,8 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations, icons 
   const [cursor, setCursor] = useState(false);
   const map = useMap();
   const [markers, setMarkers] = useState(null);
-
+  
+  // Getting neighborhood data, layer
   useEffect(() => {
     getNeighborhoodData().then((data) => {
       setNeighborhoodData(data);
@@ -31,6 +32,7 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations, icons 
     });
   }, []);
 
+  // Reacting to clicks on neighborhoods
   useEffect(() => {
     if (map) {
       if (cursor) map.setOptions({ draggableCursor: "pointer" });
@@ -38,6 +40,7 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations, icons 
     }
   }, [cursor]);
 
+  // Reacting to filter changes
   useEffect(() => {
     if (neighborhoodData && activeFilter) {
       getLayer(
@@ -63,8 +66,8 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations, icons 
     }
   }, [activeFilter]);
 
+  // Reacting to changes in checked project categories
   useEffect(() => {
-    console.log(icons)
     if (locations && icons) {
       setMarkers(
         locations.map((location, key) => {

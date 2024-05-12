@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react"
 import {AdvancedMarker, InfoWindow, useMarkerRef} from '@vis.gl/react-google-maps';
 import { IconApple, IconHeartHandshake, IconHome, IconMapPin } from "@tabler/icons-react";
-import LocationInfoWindowComponent from "./LocationInfoWindow";
+import LocationInfoWindowComponent from "./info_windows/LocationInfoWindow";
 import CustomIcon from "./modules/CustomIcon";
 
 const SingleMarker = ({location, map, markers}) => {
     const [markerRef, marker] = useMarkerRef();
     const [infowindowOpen, setInfowindowOpen] = useState(false);
+    // built-in icons
     const icons = {"Affordable Housing": <IconHome fill={"blue"} color={"white"}/>, "Community Partners": <IconHeartHandshake fill={"purple"} color={"white"}/>,  "Sustainable Food Systems": <IconApple fill={"green"}/>, other: <IconMapPin fill={"orange"} color={"white"}/>}
     return(
         <>
