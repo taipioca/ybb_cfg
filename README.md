@@ -44,6 +44,7 @@ The map on the website primarily has two features:
   - Cannots
     - Add new neighborhood(s) (must add to neighborhoods.json (file mapping neighborhood names to neighborhood shapes))
     - Remove neighborhood(s)
+    - Type neighborhood names any differently than they are currently typed on the existing sheets
     - Have any statistics that are not $ or % (code assumes the stats are one of the following)
     - Have any statistics that are not numbers (code assumes the statistics are numbers)
     - Have improperly formatted statistics in spreadsheet
@@ -55,5 +56,24 @@ The map on the website primarily has two features:
 # Detailed below is how you can add projects/filters
 
 - Adding a Project
+  - Add another row to the "In Use" sheet of the YBB Past Projects spreadsheet as specifed above in the YBB Projects section
+  - If you have entered a category other than one of the following:
+    <li>Affordable Housing, Sustainable Food Systems, Community Partners<li>
+    for the project's category, may want to add a custom icon for the project's marker.
+  - To add a custom icon for a category add a row to the categories sheet with the category (exactly as typed in the In Use sheet) and a image address (this will be the project's marker)
+    - <b>Note<b>: custom icons take precedence over existing category icons
 - Adding a Filter Category
-  - Adding a Filter
+  - To add a filter category add another sheet to the Mapping Project Filters spreadsheet with the name of the filter category
+  - Copy and paste the first column containing the neighborhood names, max, and "Neighborhood" cells to this sheet
+  - Also, copy by sure to put your source in the cell following the max cell it should follow the format specified above
+  - Adding a Filter to a Filter Category
+    - Add a column with the first cell set as the filter name and the remaining column's cells set as the the statistic for the neighborhood in the corresponding row
+    - <b>Note:<b> the final cell in the column should be the maximum value of the filter across the neighborhoods
+  - If unclear reference previous sheets, ex. one filter category is Race and Ethnicity with the filters Percent White, Percent Black, etc. and source of "2010 Census Data"
+- Adding images of neighborhoods
+  - To set the image that pops up in the info window when one clicks on the neighborhood,
+    paste an image address in the cell next to the corresponding neighborhood in the Neighborhood Images sheet
+    found in the Mapping Project Filters Spreadsheet
+  - By default if no image is provided, the website will refer to images on the web server
+    <b>Note:<b> we <b>strongly<b> suggest these images are set. Some of the images on the web server
+    are copyrighted.
