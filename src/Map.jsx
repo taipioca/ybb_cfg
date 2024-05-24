@@ -86,7 +86,10 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations, icons 
         defaultCenter={{ lat: 42.31, lng: -71.0891 }}
         defaultZoom={12}
         gestureHandling={"greedy"}
+        streetViewControlOptions={false}
         defaultTilt={100}
+        streetView={false}
+        streetViewControl={false}
         disableDoubleClickZoom
       >
         {overlay ? <DeckGlOverlay layers={[overlay]} /> : null}

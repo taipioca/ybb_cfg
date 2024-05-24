@@ -75,3 +75,23 @@ The map on the website primarily has two features:
     - By default if no image is provided, the website will refer to images on the web server
       - **Note:** We **strongly** suggest these images are set. Some of the images on the web server
         are copyrighted.
+
+# Google Cloud Manangement
+
+- Preface
+
+  - The project utilizes two APIs that are pay-as-you-go. (Maps Javascript API, Geocoding API)
+  - Luckily, each month Google gives $200 of free Google Maps API usage, a library both of these APIs fall under.
+  - If we want to **only** use the free $200 dollars Google gives us each month, we need to set limits on each of the APIs.
+
+- Setting Limits
+
+  - To set limits on the APIs once your in the Google Cloud Console, navigate to **APIs & Services > Library > {API (Maps Javascript API or Gecoding API)}**
+  - From there, you can click on **Quotas**, select the API you'd like to set limits on, and set your limits.
+    - If you'd like to see the pricing on the APIs to set the limits, below are the links.
+      - Maps Javascript API (we only use dynamic maps): https://mapsplatform.google.com/pricing/ (Maps page)
+      - Geocoding API (we only use geocoding): https://mapsplatform.google.com/pricing/ (Geocoding page)
+
+- Setting a Budget Alert
+  - If you'd like to be notfied when you are approaching amount of cost for the month, in your Google Cloud Console navigate to **Billing > Budgets & alerts**.
+  - Here you can set budget alerts.
