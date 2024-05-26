@@ -1,0 +1,16 @@
+.icon-container{
+    width: 2.5vmin;
+    height: 2.5vmin;
+    position: relative;
+    overflow: hidden;
+    margin-right: 2vmin;
+    margin-left: 1vmin;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.image-icon-container{
+    max-width: 100%;
+    max-height: 100%;
+}

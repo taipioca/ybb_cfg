@@ -8,8 +8,8 @@ import { PolygonLayer } from "deck.gl";
 import getLayer from "./GenerateLayers";
 import Legend from "./Legend";
 import { getNeighborhoodData } from "../utilites";
-import NeighborhoodModal from "./NeighborhoodInfoWindow";
-const MainMap = ({ setFilters, activeFilter, activeCategories, locations }) => {
+import NeighborhoodModal from "./info_windows/NeighborhoodInfoWindow";
+const MainMap = ({ setFilters, activeFilter, activeCategories, locations, icons }) => {
   const [overlay, setOverlay] = useState(false);
   const [neighborhoodData, setNeighborhoodData] = useState(false);
   const [keys, setKeys] = useState(false);
@@ -18,7 +18,8 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations }) => {
   const [cursor, setCursor] = useState(false);
   const map = useMap();
   const [markers, setMarkers] = useState(null);
-
+  
+  // Getting neighborhood data, layer
   useEffect(() => {
     getNeighborhoodData().then((data) => {
       setNeighborhoodData(data);
@@ -31,6 +32,7 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations }) => {
     });
   }, []);
 
+  // Reacting to clicks on neighborhoods
   useEffect(() => {
     if (map) {
       if (cursor) map.setOptions({ draggableCursor: "pointer" });
@@ -38,6 +40,7 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations }) => {
     }
   }, [cursor]);
 
+  // Reacting to filter changes
   useEffect(() => {
     if (neighborhoodData && activeFilter) {
       getLayer(
@@ -63,17 +66,18 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations }) => {
     }
   }, [activeFilter]);
 
+  // Reacting to changes in checked project categories
   useEffect(() => {
-    if (locations) {
+    if (locations && icons) {
       setMarkers(
         locations.map((location, key) => {
           if (activeCategories.includes(location.type)) {
-            return <SingleMarker key={key} location={location} map={map} />;
+            return <SingleMarker key={key} location={location} map={map} markers={icons} />;
           }
         })
       );
     }
-  }, [locations, activeCategories]);
+  }, [locations, activeCategories, icons]);
 
   return (
     <div className="mappy">
@@ -82,7 +86,10 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations }) => {
         defaultCenter={{ lat: 42.31, lng: -71.0891 }}
         defaultZoom={12}
         gestureHandling={"greedy"}
+        streetViewControlOptions={false}
         defaultTilt={100}
+        streetView={false}
+        streetViewControl={false}
         disableDoubleClickZoom
       >
         {overlay ? <DeckGlOverlay layers={[overlay]} /> : null}

@@ -21,14 +21,16 @@ const intializeClient = async () => {
   return [auth, googleSheets];
 };
 
-// Makes an api to google's Geocoder and logs lat and lng of first result
-const getLatLng = async (address) => {
-  return axios
-    .get(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GEOCODE_API_KEY}`
-    )
-    .then((response) => response.data.results[0].geometry.location);
+// Given a valid address returns a corresponding lat and lng using google's geocode api
+const getLatLng= async (address) => {
+        return axios
+        .get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GEOCODE_API_KEY}`
+        )
+        .then((response) => response.data.results[0].geometry.location);
 };
+
+
 
 const getNeighborhoods = async () => {
   const [auth, googleSheets] = await intializeClient();
@@ -39,42 +41,38 @@ const getNeighborhoods = async () => {
   const sheets = spreadsheetInfo.data.sheets.map(
     (sheet) => sheet.properties.title
   );
-  // Get metadata about spreadsheet
 
-  // All the sheets from the spreadsheet
+  // Get all the sheets from the spreadsheet
   let spreadsheetData = await googleSheets.spreadsheets.values.batchGet({
     auth,
     spreadsheetId: YBB_NEIGHBORHOODS_SPREADSHEETID,
     ranges: [sheets],
     valueRenderOption: "UNFORMATTED_VALUE",
   });
-  // Get all the rows from these sheets
-  spreadsheetData = spreadsheetData.data.valueRanges.map((sheet) => {
-    return { values: sheet.values, title: sheet.range.split("'")[1] };
-  });
-  // Intializing the dictionary we'll return
+  // Make a variable representing a single sheet (values: rows of sheet, title: sheet title)
+  spreadsheetData = spreadsheetData.data.valueRanges.map(
+    (sheet) => {return ({"values": sheet.values, "title": sheet.range.split("'")[1],})}
+  );
+  // Intializing the dictionary we'll return representing the neighborhoodData
   const neighborhoodData = { sources: {}, filters: [], maxes: {}, images: {} };
   let sheetStats;
   let source;
   let i;
-  // For each sheet populate the dictionary with it's statistics
+  // For each sheet, populate the dictionary with it's statistics
   spreadsheetData.forEach((sheet, index) => {
+    // Removing top row which contains filter names
     sheetStats = sheet.values.shift().slice(1);
-    if (sheet.title == "Neighborhood Images") {
+
+    if (sheet.title == "Neighborhood Images"){
       sheet.values.forEach((neighborhood) => {
-        neighborhoodData[neighborhood[0]] = {
-          ...neighborhoodData[neighborhood[0]],
-          image: neighborhood[1] ? neighborhood[1] : null,
-        };
-      });
-    } else {
+      neighborhoodData[neighborhood[0]] = {...neighborhoodData[neighborhood[0]], image: neighborhood[1] ? neighborhood[1] : null, }})
+    }
+
+    else{
       source = sheet.values.pop()[0];
       maxes = sheet.values.pop().slice(1);
-      neighborhoodData["filters"].push({
-        title: sheet.title,
-        filters: sheetStats,
-      });
-      // Get maxes
+      neighborhoodData["filters"].push({title: sheet.title, filters: sheetStats});
+      // Set maxes
       for (i = 0; i < sheetStats.length; i++) {
         neighborhoodData["maxes"][sheetStats[i]] = maxes[i];
       }
@@ -99,18 +97,24 @@ const getNeighborhoods = async () => {
 };
 const getLocations = async () => {
   const [auth, googleSheets] = await intializeClient();
-  // Get metadata about spreadsheet
-  // Read rows from spreadsheet
-
-  const getRows = await googleSheets.spreadsheets.values.get({
+  const getLocationRows = await googleSheets.spreadsheets.values.get({
     auth,
     spreadsheetId: YBB_PROJECTS_SPREADSHEETID,
-    range: "Working Document",
+    range: "In Use",
   });
-  getRows.data.values.shift();
-  const categories = new Set();
+  const getCatsRows = await googleSheets.spreadsheets.values.get({
+    auth,
+    spreadsheetId: YBB_PROJECTS_SPREADSHEETID,
+    range: "Categories",
+  })
+  // Removing top rows serving only as visual aid to user of spreadsheet
+  getCatsRows.data.values.shift()
+  getLocationRows.data.values.shift();
+  // Making categorires to keep track of unique categories
+  const categories = new Set()
+  // Getting each location object rep
   const locations = await Promise.all(
-    getRows.data.values.map(async (place) => {
+    getLocationRows.data.values.map(async (place) => {
       const position = await getLatLng(place[0]);
       if (place[1]) {
         categories.add(place[1]);
@@ -126,7 +130,12 @@ const getLocations = async () => {
       };
     })
   );
-  return [locations, Array.from(categories)];
+  // Getting markers
+  const markers = {}
+  getCatsRows.data.values.forEach((category) => {
+      markers[category[0]] = category[1] ? category[1] : null
+    })
+  return [locations, Array.from(categories), markers];
 };
 
 module.exports = { getLocations, getNeighborhoods };
