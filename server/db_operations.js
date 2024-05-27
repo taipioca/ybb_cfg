@@ -5,10 +5,11 @@ const YBB_PROJECTS_SPREADSHEETID = process.env.YBB_PROJECTS_SPREADSHEETID;
 const YBB_NEIGHBORHOODS_SPREADSHEETID =
   process.env.YBB_NEIGHBORHOODS_SPREADSHEETID;
 const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
+const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
 
 const intializeClient = async () => {
   const auth = new google.auth.GoogleAuth({
-    keyFile: "server/credentials.json",
+    credentials: credentials,
     scopes: "https://www.googleapis.com/auth/spreadsheets",
   });
 
