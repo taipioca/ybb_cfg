@@ -1,6 +1,9 @@
 async function getLocations() {
   const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/getlocations`);
   const [locations, categories, markers] = await response.json();
+  if (locations.length == 0){
+    return null;
+  }
   return [locations, categories, markers];
 }
 

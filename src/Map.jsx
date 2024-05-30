@@ -9,8 +9,7 @@ import getLayer from "./GenerateLayers";
 import Legend from "./Legend";
 import { getNeighborhoodData } from "../utilites";
 import NeighborhoodModal from "./info_windows/NeighborhoodInfoWindow";
-const MainMap = ({ setFilters, activeFilter, activeCategories, locations, icons }) => {
-  const [overlay, setOverlay] = useState(false);
+const MainMap = ({ setFilters, setOverlay, overlay, activeFilter, activeCategories, setFetchingLocations, locations, icons }) => {
   const [neighborhoodData, setNeighborhoodData] = useState(false);
   const [keys, setKeys] = useState(false);
   const [clickedNeighborhood, setClickedNeighborhood] = useState(false);
@@ -69,6 +68,7 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations, icons 
   // Reacting to changes in checked project categories
   useEffect(() => {
     if (locations && icons) {
+      setFetchingLocations(false)
       setMarkers(
         locations.map((location, key) => {
           if (activeCategories.includes(location.type)) {
@@ -76,6 +76,9 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations, icons 
           }
         })
       );
+    }
+    else if (locations == null){
+      setFetchingLocations("Failed to fetch locations. Please refresh the page or return tomorrow.")
     }
   }, [locations, activeCategories, icons]);
 
@@ -111,7 +114,7 @@ const MainMap = ({ setFilters, activeFilter, activeCategories, locations, icons 
             }}
           />
         ) : null}
-      </Map>
+      </Map>     
     </div>
   );
 };

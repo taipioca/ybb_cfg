@@ -52,9 +52,10 @@ const fetchWithCaching = async (client, address)=>{
     )
     .then(async (response) => {
       try {
-      await client.set(address, JSON.stringify(response.data.results[0].geometry.location), {EX: 60*60*24*365})
-      await client.disconnect();
-      return response.data.results[0].geometry.location
+        await client.set(address, JSON.stringify(response.data.results[0].geometry.location), {EX: 60*60*24*365})
+        await client.disconnect();
+        console.log("Saved: ", address, ": ", response.data.results[0].geometry.location)
+        return response.data.results[0].geometry.location
       }
       catch (error) {
         console.log(`Error getting Lat and Lng of ${address}: ${error}`)

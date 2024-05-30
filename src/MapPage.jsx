@@ -7,16 +7,22 @@ import { getLocations } from "../utilites";
 const MapPage = () => {
   const [activeFilter, setActiveFilter] = useState("Select Filter");
   const [filters, setFilters] = useState(false);
+  const [overlay, setOverlay] = useState(false);
   const [locations, setLocations] = useState(false)
   const [categories, setCategories] = useState([])
   const [activeCategories, setActiveCategories] = useState([])
   const [icons, setIcons] = useState({})
+  const [fetchingLocations, setFetchingLocations] = useState("Fetching locations...")
   useState(()=>{
     getLocations().then((response)=>{
+      if (response){
       setLocations(response[0])
       setCategories(response[1])
       setActiveCategories(response[1])
-      setIcons(response[2])
+      setIcons(response[2])}
+      else{
+        setLocations(null)
+      }
     })
   }, [])
   return (
@@ -35,16 +41,22 @@ const MapPage = () => {
           setActiveCategories={setActiveCategories}
         />
       </div>
+      <>
       <div className="MainMap">
+      {fetchingLocations ? <p className="fetchingNoti">{overlay ? "": "Generating overlay, "}{fetchingLocations}</p>: null}
         <MainMap
           filters={filters}
           setFilters={setFilters}
           activeCategories={activeCategories}
           activeFilter={activeFilter}
+          overlay={overlay}
+          setOverlay={setOverlay}
           locations={locations}
           icons={icons}
+          setFetchingLocations={setFetchingLocations}
         />
       </div>
+      </>
     </div>
   );
 };
