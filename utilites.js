@@ -1,13 +1,17 @@
 async function getLocations() {
-  const response = await fetch("http://localhost:1793/api/getlocations");
+  const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/getlocations`);
   const [locations, categories, markers] = await response.json();
   return [locations, categories, markers];
 }
+
 async function getNeighborhoodData() {
-  const response = await fetch("http://localhost:1793/api/getdata");
-  const neighborhoodData = response.json();
+  const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/getdata`);
+  const neighborhoodData = await response.json();
   return neighborhoodData;
 }
+
+console.log(import.meta.env.VITE_APP_API_URL);
+
 const cleanNumber = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
