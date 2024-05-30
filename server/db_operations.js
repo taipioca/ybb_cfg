@@ -4,6 +4,7 @@ const { google } = require("googleapis");
 const YBB_PROJECTS_SPREADSHEETID = process.env.YBB_PROJECTS_SPREADSHEETID;
 const YBB_NEIGHBORHOODS_SPREADSHEETID =
   process.env.YBB_NEIGHBORHOODS_SPREADSHEETID;
+const redis = require("redis");
 const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
 
@@ -23,14 +24,59 @@ const intializeClient = async () => {
 
 // Given a valid address returns a corresponding lat and lng using google's geocode api
 const getLatLng= async (address) => {
-        return axios
-        .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GEOCODE_API_KEY}`
-        )
-        .then((response) => response.data.results[0].geometry.location);
+    try{
+      const client = redis.createClient({
+        url: process.env.REDIS_URL
+    });
+      client.on('error', (err) => console.log('Redis Client Error', err));
+      await client.connect();
+      return await fetchWithCaching(client, address)
+    }
+    catch (error){
+      console.log("Error connecting to redis: ", error);
+      return await fetchNoCaching(address)
+    }
 };
 
+const fetchWithCaching = async (client, address)=>{
+  const storedLatLng = await client.get(address);
+    if (storedLatLng){
+      console.log("Used this cached address LatLng: ", storedLatLng)
+      await client.disconnect();
+      return JSON.parse(storedLatLng);
+    }
+    else{
+      return axios
+    .get(
+    `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GEOCODE_API_KEY}`
+    )
+    .then(async (response) => {
+      try {
+      await client.set(address, JSON.stringify(response.data.results[0].geometry.location), {EX: 60*60*24*365})
+      await client.disconnect();
+      return response.data.results[0].geometry.location
+      }
+      catch (error) {
+        console.log(`Error getting Lat and Lng of ${address}: ${error}`)
+        return false;
+      }
+    });
+}};
 
+const fetchNoCaching = async (address) => {
+  return axios
+  .get(
+  `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GEOCODE_API_KEY}`
+  )
+  .then(async (response) => {
+    try {
+    return response.data.results[0].geometry.location}
+    catch (error) {
+      console.log(`Error getting Lat and Lng of ${address}: ${error}`)
+      return false;
+    }
+  });
+}
 
 const getNeighborhoods = async () => {
   const [auth, googleSheets] = await intializeClient();
@@ -115,26 +161,30 @@ const getLocations = async () => {
   const locations = await Promise.all(
     getLocationRows.data.values.map(async (place) => {
       const position = await getLatLng(place[0]);
-      if (place[1]){
-        categories.add(place[1])
+      if (position) {
+        if (place[1]){
+          categories.add(place[1])
+        }
+        return {
+          position,
+          address: place[0],
+          type: place[1],
+          year: place[2] ? place[2] : null,
+          image: place[3] ? place[3] : null,
+          name: place[4] ? place[4] : null,
+          description: place[5] ? place[5] : null,
+        };
       }
-      return {
-        position,
-        address: place[0],
-        type: place[1],
-        year: place[2] ? place[2] : null,
-        image: place[3] ? place[3]: null,
-        name: place[4] ? place[4]: null,
-        description: place[5] ? place[5] : null,
-      };
     })
   );
+  
+  const filteredLocations = locations.filter(location => location !== undefined);
   // Getting markers
   const markers = {}
   getCatsRows.data.values.forEach((category) => {
       markers[category[0]] = category[1] ? category[1] : null
     })
-  return [locations, Array.from(categories), markers];
+  return [filteredLocations, Array.from(categories), markers];
 };
 
 module.exports = { getLocations, getNeighborhoods };

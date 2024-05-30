@@ -36,6 +36,7 @@
     "googleapis": "^133.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "redis": "^4.6.14",
     "use-places-autocomplete": "^4.0.1"
   },
   "devDependencies": {

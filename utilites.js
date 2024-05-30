@@ -10,8 +10,6 @@ async function getNeighborhoodData() {
   return neighborhoodData;
 }
 
-console.log(import.meta.env.VITE_APP_API_URL);
-
 const cleanNumber = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
