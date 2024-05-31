@@ -95,3 +95,15 @@ The map on the website primarily has two features:
 - Setting a Budget Alert
   - If you'd like to be notfied when you are approaching amount of cost for the month, in your Google Cloud Console navigate to **Billing > Budgets & alerts**.
   - Here you can set budget alerts.
+
+
+# Render Deployment
+- Some Notes
+  - We use Render to host and deploy the live site
+  - We have two services set up (Done 5/31/2024. This is just for reference):
+    - Web service: for hosting the live site. 
+    - Redis: for caching and storing information. Ensure that the location of this service is set to the same location as the web service. What's important here is the Redis URL, which should be set as an environment variable in the web service above as follows: REDIS_URL = "redis://red-xxxxxxxxxx"
+- Current Capabilities (Free tier)
+  - Will spin down with inactivity, so each load/reload of the site after it is inactive may take up to 50 seconds to load.
+- Upgrading to speed up loading of the site
+  - Click on "Upgrade Your Instance" in the header to switch to a paid instance with better support.
