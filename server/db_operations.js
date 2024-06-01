@@ -34,6 +34,9 @@ const getLatLng= async (address) => {
     }
     catch (error){
       console.log("Error connecting to redis: ", error);
+      if (client.isOpen){
+        await client.disconnect()
+      }
       return await fetchNoCaching(address)
     }
 };
@@ -58,6 +61,9 @@ const fetchWithCaching = async (client, address)=>{
         return response.data.results[0].geometry.location
       }
       catch (error) {
+        if (client.isOpen){
+          await client.disconnect()
+        }
         console.log(`Error getting Lat and Lng of ${address}: ${error}`)
         return false;
       }

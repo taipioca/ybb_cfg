@@ -86,7 +86,7 @@ const getRedliningLayer = async () => {
     C: [214, 154, 64],
     D: [96, 32, 138],
   };
-  const districts = await fetch("src/redlining.json").then((data) =>
+  const districts = await fetch("/redlining.json").then((data) =>
     data.json()
   );
   const polygonData = [];
